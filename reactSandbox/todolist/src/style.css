@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+:root{
+    --purple: #6a4c93;
+    --red: #f95738;
+    --blue: #1982c4;
+    --yellow: #ffbb00;
+    --green: #8ac926;
+    --offwhite: #f1faee;
+    --black: rgb(20, 18, 18);
+    --skyBlue: #e0fbfc;
+    --paleBlue: rgb(199, 223, 230);
+    --gray: rgb(94, 92, 92);
+    --gray2: rgb(248, 247, 247);
+    --animation-duration: 500ms;
+}
+*{
+    margin:0;
+    padding:0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+.createContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background:var(--blue);
+    padding:30px 0; 
+}
+.addListContainer, .errorMsg{max-width: 70%;}
+.addListContainer h1, .addListContainer p{padding-bottom:10px;}
+.addListContainer h1{
+    text-align: center;
+    color: var(--offwhite);
+    font-weight:700;
+    font-size:1.8rem;
+}
+.addListContainer p{
+    font-size: .9rem;
+    color:var(--offwhite);
+    text-align: center;
+}
+.addListContainer p .plusIcon, .addListContainer p .xIcon, .addListContainer p .checkboxIcon, .maxChar{font-weight: 700;}
+.addListContainer p .maxChar{color:var(--green);}
+.addListContainer p .plusIcon{
+    display:inline-block;
+    background:var(--green);
+    border-radius:3px;
+    padding:4px 8px;
+    color:var(--black);
+    font-size: .7rem;
+    margin:0 5px;
+}
+.addListContainer p .xIcon{
+    display:inline-block;
+    background:var(--red);
+    color:var(--offwhite);
+    border-radius:3px;
+    padding:4px 8px;
+    font-size: .7rem;
+    margin:0 5px;
+}
+.addListContainer p .undoIcon{
+    display:inline-block;
+    background:var(--purple);
+    color:var(--offwhite);
+    border-radius:3px;
+    padding:4px 8px;
+    font-size: .7rem;
+    margin:0 5px;
+}
+.addListContainer p .checkboxIcon{
+    border:1px solid var(--yellow);
+    width: 11px;
+    height: 12px;
+    background:#fff;
+    border-radius: 2px;
+    display: inline-block;
+    margin:0 5px;
+}
+.addListContainer form{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-gap:10px;
+    padding:20px 20px 10px;
+}
+.addListContainer form input[type="text"]{
+    padding:8px 10px;
+    border-radius:3px;
+    background:var(--offwhite);
+    font-size: .8rem;
+    font-weight: 700;
+}
+.addListContainer form .addItemBtn{
+    background:var(--green);
+    padding:0 10px;
+    border-radius:3px;
+    cursor: pointer;
+}
+.addListContainer form .addItemBtn svg{
+    font-size:.9rem;
+    color:var(--black);
+    font-weight: 700;
+    margin-right:3px;
+}
+.addListContainer form .addItemBtn span{
+    font-size: .9rem;
+    color:var(--black);
+    font-weight: 700;
+}
+.errorMsg .error{
+    font-size:.9rem;
+    font-weight: 700;
+    color:var(--red);
+    text-align: center;
+}
+.errorMsg .error svg{
+    margin-right:5px;
+}
