@@ -1,9 +1,10 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import './style.css';
 
 import Instructions from './components/Instructions';
 import AddInput from './components/AddInput';
+import ListContainer from './components/ListContainer';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
@@ -11,12 +12,13 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 class App extends React.Component{
     state = {
         inputValue: "",
-        errorMsg: ""
+        errorMsg: "",
+        todos: []
     }
 
     getInputValue = () => {
         const addItemInput = document.getElementById('addItemInput');
-        if(addItemInput.value == "" || addItemInput.value == null){
+        if(addItemInput.value === "" || addItemInput.value === null){
             this.setState({errorMsg: "Field is empty!"})
         }else if(addItemInput.value.length > 50){
             this.setState({errorMsg: "Must be atleast 50 characters only!"})
@@ -25,11 +27,15 @@ class App extends React.Component{
                 inputValue: addItemInput.value, 
                 errorMsg: ""
             })
+
+            this.state.todos.push(addItemInput.value);
+
+            addItemInput.value = "";
         }
     }
 
     testError = () => {
-        if(this.state.errorMsg != ""){
+        if(this.state.errorMsg !== ""){
             return( <div className="errorMsg">
                         <p className="error">
                             {<FontAwesomeIcon icon={faExclamationCircle} />}
@@ -49,6 +55,7 @@ class App extends React.Component{
                     </div>
                     {this.testError()}
                 </section>
+                <ListContainer todos={this.state.todos}/>
             </main>
         )
     }

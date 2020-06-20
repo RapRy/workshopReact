@@ -117,3 +117,142 @@
 .errorMsg .error svg{
     margin-right:5px;
 }
+.listContainer{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    padding-bottom:50px;
+}
+.listContainer h4{
+    font-size:1.2rem;
+    color:var(--black);
+    text-align:center;
+    padding-bottom:7px;
+    border-bottom:2px solid var(--black);
+}
+.todoContainer{
+    padding:20px 20px 0;
+    width:70%;
+}
+.todo{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    grid-gap:10px;
+    margin-bottom:10px;
+    background:var(--offwhite);
+    border-radius: 3px;
+    padding: 10px;
+}
+.todo:first-child{
+    margin-top:20px;
+}
+.todo:last-child{
+    margin-bottom:0;
+}
+.todoCheckbox{
+    position:relative;
+    top:1px;
+    left:0;
+    align-self: center;
+}
+.todoCheckbox input[type="checkbox"]{
+    position: relative;
+    top: -1px;
+    left:0;
+    z-index:2;
+    height:13px;
+    width:14px;
+    opacity:0;
+    cursor:pointer;
+}
+.spanCheckbox{
+    display: block;
+    width:13px;
+    height:14px;
+    position: absolute;
+    top:0;
+    left:0;
+    background:#fff;
+    border-radius:2px;
+    border:1px solid var(--yellow);
+    z-index:0;
+}
+.todoCheckbox input[type="checkbox"]:checked ~ span:after{
+    font-family: 'Font Awesome 5 Free';
+    font-size:.55rem;
+    font-weight: 900;
+    color:var(--yellow);
+    content: '\f00c';
+    position: absolute;
+    top:2px;
+    left:1px;
+    z-index: 1;
+}
+
+.todoDesc{
+    align-self: center;
+}
+.todoDesc p{
+    font-size:.9rem;
+    font-weight:700;
+    color:var(--black);
+}
+.deleteItem{
+    display:inline-block;
+    background:var(--red);
+    padding: 8px 10px;
+    border-radius: 3px;
+    cursor:pointer;
+    justify-self: end;
+    align-self: center;
+}
+.deleteItem svg{
+    font-size:.9rem;
+    color:var(--offwhite);
+    font-weight:700;
+    margin-right:5px;
+}
+.deleteItem span{
+    font-size: .9rem;
+    color:var(--offwhite);
+    font-weight:700;
+}
+.doneTodo{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    grid-gap:10px;
+    margin-bottom:10px;
+    background:var(--gray2);
+    border-radius:3px;
+    padding:10px;
+}
+.doneTodo:first-child{
+    margin-top:20px;
+}
+.doneTodo:last-child{
+    margin-bottom:0;
+}
+.doneTodoDesc p{
+    font-size: .9rem;
+    font-weight:700;
+    color:var(--gray);
+    text-decoration: line-through;
+}
+.undoItem{
+    display: inline-block;
+    background:var(--purple);
+    padding:8px 10px;
+    border-radius:3px;
+    cursor: pointer;
+}
+.undoItem svg{
+    font-size:.75rem;
+    color:var(--offwhite);
+    font-weight: 700;
+    margin-right:5px;
+}
+.undoItem span{
+    font-size: .9rem;
+    color:var(--offwhite);
+    font-weight: 700;
+}
