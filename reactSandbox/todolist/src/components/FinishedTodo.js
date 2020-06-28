@@ -8,9 +8,14 @@ class FinishedTodo extends React.Component{
         return(
             <div className="doneTodo">
                 <div className="doneTodoDesc">
-                    <p>insert something here</p>
+                    <p>{this.props.item}</p>
                 </div>
-                <button type="button" name="undo" className="undoItem">
+                <button 
+                    type="button" 
+                    name="undo" 
+                    className="undoItem" 
+                    onClick={this.props.undoDoneTodo.bind(this, this.props.item)}
+                >
                     <FontAwesomeIcon icon={faUndo} />
                     <span>Undo</span>
                 </button>

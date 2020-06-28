@@ -4,26 +4,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 class UnfinishedTodo extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            item: props.item,
-            checkTodoFn: props.checkTodo,
-            testTodos: []
-        }
+    componentWillUnmount(){
+        const todos = document.querySelectorAll('.todo');
+        todos.forEach((todo) => {
+            todo.firstElementChild.firstElementChild.checked = false;
+        })
     }
 
     render(){
         return(
             <div className="todo">
                 <div className="todoCheckbox">
-                    <input type="checkbox" className="checkboxTodo" onChange={this.state.checkTodoFn}/>
+                    <input 
+                        type="checkbox" 
+                        className="checkboxTodo" 
+                        onChange={this.props.checkTodo.bind(this, this.props.item)}
+                    />
                     <span className="spanCheckbox"></span>
                 </div>
                 <div className="todoDesc">
-                    <p>{this.state.item}</p>
+                    <p>{this.props.item}</p>
                 </div>
-                <button type="button" name="delete" className="deleteItem">
+                <button 
+                    type="button" 
+                    name="delete" 
+                    className="deleteItem" 
+                    onClick={this.props.removeTodo.bind(this, this.props.item)}
+                >
                     <FontAwesomeIcon icon={faTimes} />
                     <span>Delete</span>
                 </button>
