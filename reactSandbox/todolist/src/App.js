@@ -1,5 +1,6 @@
 import React from 'react';
-// import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+
 import './style.css';
 
 import Instructions from './components/Instructions';
@@ -30,13 +31,30 @@ class App extends React.Component{
                 errorMsg: ""
             })
 
-            this.state.todos.push(addItemInput.value);
+            let isDate = new Date();
+            let month = isDate.getMonth();
+            let day = isDate.getDate();
+            let year = isDate.getFullYear();
+            let hour = isDate.getHours();
+            let minutes = isDate.getMinutes();
+
+            this.state.todos.push({
+                todoId: uuidv4(),
+                todo: addItemInput.value,
+                dateTime: {
+                    month: month,
+                    day: day,
+                    year: year,
+                    hour: hour,
+                    minutes: minutes
+                }
+            });
 
             addItemInput.value = "";
         }
     }
 
-    testError = () => {
+    showError = () => {
         if(this.state.errorMsg !== ""){
             return( <div className="errorMsg">
                         <p className="error">
@@ -47,21 +65,42 @@ class App extends React.Component{
         }
     }
 
-    removeTodo = (item) => {
-        const newTodo = this.state.todos.filter((todo, i) => todo != item);
+    removeTodo = (itemId) => {
+        const newTodo = this.state.todos.filter((todo, i) => todo.todoId != itemId);
         this.setState({todos:newTodo})
     }
 
-    checkTodo = (item) => {
-        const newTodo = this.state.todos.filter((todo, i) => todo != item);
+    checkTodo = (itemId, item, itemAddedDateTime) => {
+        const newTodo = this.state.todos.filter((todo, i) => todo.todoId != itemId);
         this.setState({todos:newTodo});
-        this.state.doneTodos.push(item);
+        let isDate = new Date();
+        let month = isDate.getMonth();
+        let day = isDate.getDate();
+        let year = isDate.getFullYear();
+        let hour = isDate.getHours();
+        let minutes = isDate.getMinutes();
+        this.state.doneTodos.push({
+            todoId: itemId,
+            todo:item,
+            dateTime: {
+                month: month,
+                day: day,
+                year: year,
+                hour: hour,
+                minutes: minutes
+            },
+            addedDateTime: itemAddedDateTime
+        });
     }
 
-    undoDoneTodo = (item) => {
-        const newDoneTodo = this.state.todos.filter((todo, i) => todo != item);
+    undoDoneTodo = (itemId, item, addedDateTime) => {
+        const newDoneTodo = this.state.doneTodos.filter((todo, i) => todo.todoId != itemId);
         this.setState({doneTodos:newDoneTodo});
-        this.state.todos.push(item);
+        this.state.todos.push({
+            todoId: itemId,
+            todo: item,
+            dateTime: addedDateTime
+        });
     }
 
     render(){
@@ -72,7 +111,7 @@ class App extends React.Component{
                         <Instructions />
                         <AddInput getValue={this.getInputValue}/>
                     </div>
-                    {this.testError()}
+                    {this.showError()}
                 </section>
                 <section className="listContainer" id="listContainer">
                     <div className="unfinishedContainer todoContainer">

@@ -142,6 +142,8 @@
     background:var(--offwhite);
     border-radius: 3px;
     padding: 10px;
+    opacity:0;
+    transition: opacity 200ms ease-in-out;
 }
 .todo:first-child{
     margin-top:20px;
@@ -196,6 +198,19 @@
     font-size:.9rem;
     font-weight:700;
     color:var(--black);
+}
+.todoDate{
+    margin:5px 0 0 10px;
+}
+.todoDate svg{
+    font-size: .75rem;
+    color:var(--gray);
+    margin-right:5px;
+    vertical-align: middle;
+}
+.todoDate span{
+    color:var(--gray);
+    font-size:.65rem;
 }
 .deleteItem{
     display:inline-block;
@@ -255,4 +270,16 @@
     font-size: .9rem;
     color:var(--offwhite);
     font-weight: 700;
+}
+.test-entered{
+    opacity:1
+}
+.test-entering{
+    opacity:0.1;
+}
+.test-exiting{
+    opacity:0.5;
+}
+.test-exited{
+    opacity:0;
 }
