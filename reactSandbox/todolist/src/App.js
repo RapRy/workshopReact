@@ -11,6 +11,7 @@ import FinishedTodo from './components/FinishedTodo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 
+
 class App extends React.Component{
     state = {
         inputValue: "",

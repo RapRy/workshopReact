@@ -142,8 +142,8 @@
     background:var(--offwhite);
     border-radius: 3px;
     padding: 10px;
-    opacity:0;
-    transition: opacity 200ms ease-in-out;
+    /* opacity:0;
+    transform:translateX(50px); */
 }
 .todo:first-child{
     margin-top:20px;
@@ -190,7 +190,6 @@
     left:1px;
     z-index: 1;
 }
-
 .todoDesc{
     align-self: center;
 }
@@ -271,15 +270,21 @@
     color:var(--offwhite);
     font-weight: 700;
 }
-.test-entered{
-    opacity:1
+.trans-enter{
+    opacity:1;
+    transform:translateX(0px);
 }
-.test-entering{
+.trans-enter-active{
     opacity:0.1;
+    transform:translateX(50px);
+    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
 }
-.test-exiting{
-    opacity:0.5;
+.trans-exit{
+    opacity:0.2;
+    transform:translateX(50px);
 }
-.test-exited{
+.trans-exit-active{
     opacity:0;
+    transform:translateX(50px);
+    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
 }
