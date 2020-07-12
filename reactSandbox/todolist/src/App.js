@@ -10,6 +10,7 @@ import FinishedTodo from './components/FinishedTodo';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
+import { TransitionGroup } from 'react-transition-group';
 
 
 class App extends React.Component{

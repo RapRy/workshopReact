@@ -270,7 +270,7 @@
     color:var(--offwhite);
     font-weight: 700;
 }
-.trans-enter{
+/* .trans-enter{
     opacity:1;
     transform:translateX(0px);
 }
@@ -287,4 +287,26 @@
     opacity:0;
     transform:translateX(50px);
     transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+} */
+/* animation test */
+.todo{
+    opacity:0.1;
+    transform:translateX(50px);
+    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out; 
+}
+.todoentering{
+    opacity:0.1;
+    transform:translateX(50px);
+}
+.todoentered{
+    opacity:1;
+    transform:translateX(0px);
+}
+.todoexiting{
+    opacity:0.2;
+    transform:translateX(50px);
+}
+.todoexited{
+    opacity:0;
+    transform:translateX(50px);
 }

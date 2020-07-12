@@ -1,10 +1,9 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faTemperatureHigh } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
-
-import { Transition } from 'react-transition-group';
+import { Transition, CSSTransition } from 'react-transition-group';
 
 class UnfinishedTodo extends React.Component{
     state = {
@@ -13,7 +12,9 @@ class UnfinishedTodo extends React.Component{
         year: "",
         hour: "",
         minutes: "",
-        meridian: ""
+        meridian: "",
+        toggleAnimation: true,
+        todoAction: ""
     }
 
     componentWillUnmount(){
@@ -21,6 +22,18 @@ class UnfinishedTodo extends React.Component{
         todos.forEach((todo) => {
             todo.firstElementChild.firstElementChild.checked = false;
         })
+    }
+
+    componentDidUpdate(){
+        if(this.state.todoAction === "delete"){
+            this.props.removeTodo(this.props.item.todoId)
+            console.log(this.props.item.todoId)
+            // this.setState({toggleAnimation: true})
+            console.log("delete")
+        }else if(this.state.todoAction === "checked"){
+            this.props.checkTodo(this.props.item.todoId, this.props.item.todo, this.props.item.dateTime)
+            console.log("checked")
+        }
     }
 
     convertMonthToString(month){
@@ -110,16 +123,23 @@ class UnfinishedTodo extends React.Component{
         })
     }
 
+    todoAnimation(todoAction){
+        this.setState({
+            toggleAnimation:false,
+            todoAction:todoAction
+        })
+    }
+
     render(){
         return(
-            <Transition in={true} timeout={200} appear>
+            <Transition in={this.state.toggleAnimation} timeout={200} appear={true}>
                 {state => (
-                    <div className={`todo test-${state}`}>
+                    <div className={`todo todo${state}`}>
                         <div className="todoCheckbox">
                             <input 
                                 type="checkbox" 
                                 className="checkboxTodo" 
-                                onChange={this.props.checkTodo.bind(this, this.props.item.todoId, this.props.item.todo, this.props.item.dateTime)}
+                                onChange={this.todoAnimation.bind(this, "checked")}
                             />
                             <span className="spanCheckbox"></span>
                         </div>
@@ -134,7 +154,8 @@ class UnfinishedTodo extends React.Component{
                             type="button" 
                             name="delete" 
                             className="deleteItem" 
-                            onClick={this.props.removeTodo.bind(this, this.props.item.todoId)}
+                            // onClick={this.props.removeTodo.bind(this, this.props.item.todoId)}
+                            onClick={this.todoAnimation.bind(this, "delete")}
                         >
                             <FontAwesomeIcon icon={faTimes} />
                             <span>Delete</span>
