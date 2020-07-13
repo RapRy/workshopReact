@@ -13,7 +13,7 @@ class FinishedTodo extends React.Component{
         minutes: "",
         meridian: ""
     }
-
+    // get month name
     convertMonthToString(month){
         switch(month){
             case 0:
@@ -44,7 +44,7 @@ class FinishedTodo extends React.Component{
                 return month 
         }
     }
-
+    // convert hour to 12 hour format
     convertHour(hour){
         switch(hour){
             case 13:
@@ -75,7 +75,7 @@ class FinishedTodo extends React.Component{
                 return hour
         }
     }
-
+    // get AM or PM
     getMeridian(hour){
         if(hour >= 12){
             return "PM";
@@ -83,15 +83,17 @@ class FinishedTodo extends React.Component{
             return "AM"
         }
     }
-
+    // assign the date values to the state properties
     componentDidMount(){
+        // destructure dateTime
         let { month, day, year, hour, minutes } = this.props.item.dateTime;
+        // meridian return value
         let meridian = this.getMeridian(hour);
-
+        // month return value
         month = this.convertMonthToString(month);
+        // hour return value
         hour = this.convertHour(hour);
-
-
+        // assign values to the state
         this.setState({
             month: month,
             day: day,
@@ -116,6 +118,7 @@ class FinishedTodo extends React.Component{
                     type="button" 
                     name="undo" 
                     className="undoItem" 
+                    // eventlistener
                     onClick={this.props.undoDoneTodo.bind(this, this.props.item.todoId, this.props.item.todo, this.props.item.addedDateTime)}
                 >
                     <FontAwesomeIcon icon={faUndo} />

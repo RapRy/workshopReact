@@ -270,32 +270,32 @@
     color:var(--offwhite);
     font-weight: 700;
 }
-/* .trans-enter{
-    opacity:1;
-    transform:translateX(0px);
+.trans-enter{
+    opacity:0;
+    transform:translateX(50px);
 }
 .trans-enter-active{
-    opacity:0.1;
-    transform:translateX(50px);
+    opacity:1;
+    transform:translateX(0px);
     transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
 }
 .trans-exit{
     opacity:0.2;
-    transform:translateX(50px);
+    transform:translateX(0px);
 }
 .trans-exit-active{
     opacity:0;
     transform:translateX(50px);
     transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
-} */
+}
 /* animation test */
-.todo{
-    opacity:0.1;
+/* .todo{
+    opacity:0;
     transform:translateX(50px);
     transition: opacity 200ms ease-in-out, transform 200ms ease-in-out; 
 }
 .todoentering{
-    opacity:0.1;
+    opacity:0;
     transform:translateX(50px);
 }
 .todoentered{
@@ -309,4 +309,4 @@
 .todoexited{
     opacity:0;
     transform:translateX(50px);
-}
+} */
