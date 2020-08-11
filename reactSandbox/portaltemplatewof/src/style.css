@@ -83,3 +83,136 @@ a{text-decoration: none;}
 	left:0;
 	z-index:0;
 }
+
+.subCategory{
+	background-color:var(--darkPurple2);
+	text-align: center;
+	padding:5px 0;
+	position:relative;
+	z-index: 0
+}
+
+.subCategory li{
+	display: inline-block;
+}
+
+.subCategory li a{
+	color:var(--white);
+	font-family: var(--quantico);
+	font-size:.9rem;
+	padding:5px 10px;
+	display: inline-block;
+	cursor:pointer;
+}
+
+.subCategory li a:hover{
+	color:var(--yellow);
+}
+
+.mainContainer{
+	max-width:600px;
+	height:100%;
+	margin:0 auto;
+}
+
+.contentWrapper{
+	column-count: 2;
+	column-gap: 10px;
+	padding:20px;
+}
+
+.content{
+	padding:10px;
+	border-radius:5px;
+	background:#fff;
+	box-shadow:3px 3px 10px rgba(0,0,0,.12);
+	margin-bottom: 10px;
+	-webkit-column-break-inside: avoid;
+    page-break-inside:avoid;
+    break-inside:avoid;
+    cursor: pointer;
+}
+
+.contentThumb{margin-bottom:5px;}
+
+.contentName{margin-bottom:10px;}
+
+.contentName p{
+	text-align: center;
+	font-family:var(--roboto);
+	font-size:.8rem;
+	color:var(--darkPurple);
+}
+
+.contentCta a{
+	display: block;
+	text-align: center;
+	font-family: var(--quantico);
+	font-weight:700;
+	padding:5px 0;
+	width:100%;
+	background-color:var(--darkOrange);
+	border-radius:5px;
+	color:var(--white);
+	font-size: .75rem;
+}
+
+.contentCta a:hover{color:var(--yellow);}
+
+.previewWrapper{padding:20px;}
+
+.prevThumb{
+	text-align: center;
+	padding-bottom:20px;
+}
+
+.prevThumb img, .prevThumb video{width:60%;}
+
+.prevNameCta{padding-bottom:20px;}
+
+.prevName{padding-bottom: 20px}
+
+.prevName h3{
+	font-size:1rem;
+	text-align: center;
+	font-family: var(--quantico);
+	font-weight: 700;
+	color:var(--darkPurple);
+}
+
+.prevCta{text-align: center;}
+
+.prevCta a{
+	display: inline-block;
+	text-align: center;
+	font-family: var(--quantico);
+	font-weight:700;
+	padding:10px 30px;
+	background-color:var(--darkOrange);
+	border-radius: 5px;
+	color:var(--white);
+	font-size:1rem;
+}
+
+.prevCta a:hover{color: var(--yellow)}
+
+.prevDesc{padding-bottom:20px;}
+
+.prevDesc p{
+	color:var(--darkPurple);
+	font-size: .8rem;
+	line-height: 1.6;
+	text-align: center;
+	font-family: var(--roboto);
+}
+
+
+
+
+@media all and (min-width:340px) and (max-width:499px){
+    .contentWrapper{column-count: 3;}
+}
+
+@media all and (min-width:500px){
+    .contentWrapper{column-count: 4;}
+} 
