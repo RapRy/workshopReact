@@ -4,6 +4,7 @@
 	if(isset($_POST['subCatId'])){
 		$catId = $_POST['catId'];
 		$subCatId = $_POST['subCatId'];
+    $subCatName = $_POST['subCatName'];
 
 		$contentQuery = "SELECT id, title, file_name, original_file_name, mime, sub_category_id FROM cms.contents WHERE id!=1 and category_id=? and sub_category_id=? order by id desc limit 30";
 
@@ -23,7 +24,8 @@
                     "title" => $title,
                     "filename" => pathinfo($filename, PATHINFO_FILENAME),
                     "fileExtension" => pathinfo($filename, PATHINFO_EXTENSION),
-                    "originalFilename" => pathinfo($originalFilename, PATHINFO_FILENAME)
+                    "originalFilename" => pathinfo($originalFilename, PATHINFO_FILENAME),
+                    "subCatName" => $subCatName
                 ];
                 array_push($data, $dataAssoc);
             }

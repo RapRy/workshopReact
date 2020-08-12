@@ -1,24 +1,27 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import logo from './assets/logo.png';
 
 import axios from 'axios';
+import { CSSTransition, TransitionGroup, Transition } from 'react-transition-group';
 
 import './style.css';
 
 import MainCategory from './components/MainCategory';
-import SubCategories from './components/SubCategories';
 import Content from './components/Content';
 import Preview from './components/Preview';
+import SubCategory from './components/SubCategory';
 
 class App extends React.Component{
 	state = {
-		subCategories: "",
-		contents: "",
-		previewContent: ""
+		subCategories: [],
+		contents: [],
+		previewContent: "",
+		subCat: ""
 	}
 
 	hideContents = () => {
-		this.setState({contents: ""});
+		this.setState({contents: [], subCat: ""});
 	}
 
 	showPreview = (contentId) => {
@@ -53,18 +56,20 @@ class App extends React.Component{
 
 				const subCat = document.querySelectorAll('.subCategory ul li a');
 				const catId = subCat[0].nextElementSibling.value;
-				const subCatId = subCat[0].nextElementSibling.nextElementSibling.value
+				const subCatId = subCat[0].nextElementSibling.nextElementSibling.value;
+				const subCatName = subCat[0].innerText;
 
-				this.getContents(catId, subCatId)
+				this.getContents(catId, subCatId, subCatName)
 
 			});
 	}
 
-	getContents = (catId, subCatId) => {
+	getContents = (catId, subCatId, subCatName) => {
 
 		const dataForm = new FormData;
 		dataForm.append('catId', catId);
 		dataForm.append('subCatId', subCatId);
+		dataForm.append('subCatName', subCatName)
 
 		axios({
 			method: 'post',
@@ -77,41 +82,22 @@ class App extends React.Component{
 					this.setState({previewContent: ""})
 				}
 
-				this.setState({contents: res.data})
+				this.setState({contents: res.data, subCat:res.data[0].subCatName})
 			});
 	}
 
 	render(){
-		let renderSubCat = [];
-		let renderContent = [];
-		if(this.state.subCategories != ""){
-			this.state.subCategories.map((item, id) => {
-				renderSubCat.push(<SubCategories data={item} key={id} getContents={this.getContents}/>);
-			})
-		}
-
-		if(this.state.contents != ""){
-			this.state.contents.map((item, id) => {
-				renderContent.push(<Content data={item} key={id} showPreview={this.showPreview} hideContents={this.hideContents}/>)
-			})
-		}
-
 		return(
 			<React.Fragment>
 				<header className="header">
 					<img src={logo} alt="Powerland" />
 				</header>
 				<MainCategory getSubCats={this.getSubCats} />
-				<section className="subCategory">
-					<ul data-main-category={(this.state.subCategories === "") ? "Games-apk" : this.state.subCategories[0].category}>
-						{renderSubCat.map((item, id) => item)}
-					</ul>
-				</section>
+				<SubCategory subCategories={this.state.subCategories} getContents={this.getContents} />
 				<main className="mainContainer">
-					<section className="contentWrapper">
-						{renderContent.map((item, id) => item)}
-					</section>
-					{(this.state.previewContent != "")? <Preview data={this.state.previewContent}/> : ""}
+					{(this.state.subCat != "") ? <Content contents={this.state.contents} showPreview={this.showPreview} hideContents={this.hideContents} subCatName={this.state.subCat}/> : ""}
+
+					{(this.state.previewContent != "") ? <Preview data={this.state.previewContent}/> : ""}
 				</main>
 			</React.Fragment>
 		)

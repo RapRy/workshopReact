@@ -14,7 +14,8 @@ class SubCategories extends React.Component{
 		e.preventDefault();
 		const catId = e.currentTarget.nextElementSibling.value;
 		const subCatId = e.currentTarget.nextElementSibling.nextElementSibling.value;
-		this.props.getContents(catId, subCatId)
+		const subCatName = e.currentTarget.innerText;
+		this.props.getContents(catId, subCatId, subCatName)
 	}
 
 	render(){
