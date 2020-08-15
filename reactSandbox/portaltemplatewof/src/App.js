@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import logo from './assets/logo.png';
 
 import axios from 'axios';
-import { CSSTransition, TransitionGroup, Transition } from 'react-transition-group';
 
 import './style.css';
 
@@ -17,7 +16,15 @@ class App extends React.Component{
 		subCategories: [],
 		contents: [],
 		previewContent: "",
-		subCat: ""
+		subCat: "",
+		cat: ""
+	}
+
+	componentDidMount(){
+		const dataMainCat = document.querySelectorAll('.mainCategory ul li');
+		this.getSubCats(dataMainCat[0].getAttribute('data-main-cat'))
+
+		this.setState({cat: dataMainCat[0].getAttribute('data-main-cat')})
 	}
 
 	hideContents = () => {
@@ -41,6 +48,8 @@ class App extends React.Component{
 		const dataForm = new FormData;
 		dataForm.append('cat', dataMainCat);
 
+		console.log(dataMainCat)
+
 		axios({
 			method: 'post',
     		url: "http://localhost/_ry/workshopReact/workshopReact/reactSandbox/portaltemplatewof/php/subcategories.php",
@@ -52,7 +61,7 @@ class App extends React.Component{
 					this.setState({previewContent: ""})
 				}
 
-				this.setState({subCategories: res.data})
+				this.setState({subCategories: res.data, cat: dataMainCat})
 
 				const subCat = document.querySelectorAll('.subCategory ul li a');
 				const catId = subCat[0].nextElementSibling.value;
@@ -87,17 +96,31 @@ class App extends React.Component{
 	}
 
 	render(){
+		const headerStyle = {
+			backgroundColor: "rgba(46, 27, 59, 1)",
+			textAlign: "center",
+			padding: "8px 0",
+			position: "relative",
+			zIndex: "1"
+		}
+
+		const mainContStyle = {
+			maxWidth: "600px",
+			height: "100%",
+			margin: "0 auto"
+		}
+
 		return(
 			<React.Fragment>
-				<header className="header">
+				<header className="header" style={headerStyle}>
 					<img src={logo} alt="Powerland" />
 				</header>
 				<MainCategory getSubCats={this.getSubCats} />
-				<SubCategory subCategories={this.state.subCategories} getContents={this.getContents} />
-				<main className="mainContainer">
-					{(this.state.subCat != "") ? <Content contents={this.state.contents} showPreview={this.showPreview} hideContents={this.hideContents} subCatName={this.state.subCat}/> : ""}
+				{(this.state.subCategories != "") ? <SubCategory subCategories={this.state.subCategories} getContents={this.getContents} /> : ""}
+				<main className="mainContainer" style={mainContStyle}>
+					{(this.state.subCat != "") ? <Content contents={this.state.contents} showPreview={this.showPreview} hideContents={this.hideContents} subCatName={this.state.subCat} catName={this.state.cat}/> : ""}
 
-					{(this.state.previewContent != "") ? <Preview data={this.state.previewContent}/> : ""}
+					{(this.state.previewContent != "") ? <Preview data={this.state.previewContent} catName={this.state.cat}/> : ""}
 				</main>
 			</React.Fragment>
 		)

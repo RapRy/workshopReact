@@ -28,7 +28,7 @@ body{
 ul{list-style: none;}
 a{text-decoration: none;}
 
-.header{
+/* .header{
 	background-color:var(--darkPurple);
 	text-align: center;
 	padding:8px 0;
@@ -214,26 +214,4 @@ a{text-decoration: none;}
 
 @media all and (min-width:500px){
     .contentWrapper{column-count: 4;}
-}
-
-.slide{
-	position:relative;
-	top:-200px;
-	opacity:0;
-	transition: top 400ms ease-in-out, opacity 400ms ease-in-out;
-} 
-
-.slide-entering{
-	top:-200px;
-	opacity: 0;
-}
-
-.slide-entered{
-	top:0;
-	opacity:1;
-}
-
-.slide-exiting, .slide-exited{
-	top:-200px;
-	opacity:0;
-}
+} */

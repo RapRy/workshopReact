@@ -1,16 +1,21 @@
 import React from 'react';
 import Contents from './Contents';
 
-class Content extends React.Component{
-	render(){
-		return(
-			<section className="contentWrapper" data-subCat={this.props.subCatName}>
-				{this.props.contents.map((item, id) => {
-					return <Contents data={item} key={id} showPreview={this.props.showPreview} hideContents={this.props.hideContents}/>
-				})}
-			</section>
-		)
+function Content({ subCatName, contents, hideContents, showPreview, catName }){
+
+	const contentWrapStyle = {
+		columnCount: "3",
+		columnGap: "10px",
+		padding: "20px"
 	}
+
+	return(
+		<section className="contentWrapper" style={contentWrapStyle}>
+			{contents.map((item, id) => {
+				return <Contents data={item} key={id} showPreview={showPreview} hideContents={hideContents} catName={catName}/>
+			})}
+		</section>
+	)
 }
 
 export default Content;
