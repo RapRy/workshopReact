@@ -1,13 +1,10 @@
 import React from 'react';
 
 class SubCategories extends React.Component{
-	
 	componentDidMount(){
-		// const subCat = document.querySelectorAll('.subCategory ul li a');
-		// const catId = subCat[0].nextElementSibling.value;
-		// const subCatId = subCat[0].nextElementSibling.nextElementSibling.value
-
-		// this.props.getContents(catId, subCatId)
+		const aTag = document.querySelectorAll('.subCategory ul li a');
+		 
+		aTag[0].style.color = "rgba(248, 245, 130, 1)";
 	}
 
 	setContent = (e) => {
@@ -15,8 +12,15 @@ class SubCategories extends React.Component{
 		const catId = e.currentTarget.nextElementSibling.value;
 		const subCatId = e.currentTarget.nextElementSibling.nextElementSibling.value;
 		const subCatName = e.currentTarget.innerText;
+		const aTag = document.querySelectorAll('.subCategory ul li a');
 		// const catName = e.currentTarget.parentElement.parentElement.getAttribute('data-category')
+		this.props.hideContents();
 		this.props.getContents(catId, subCatId, subCatName)
+
+		aTag.forEach((a) => a.style.color = "#f6f6f6");
+
+		e.currentTarget.style.color = "rgba(248, 245, 130, 1)";
+
 	}
 
 	render(){

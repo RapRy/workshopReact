@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { CSSTransition } from 'react-transition-group';
+
 class Contents extends React.Component{
 	constructor(props){
 		super(props);
@@ -75,6 +77,7 @@ class Contents extends React.Component{
 		const { contentId, filename, fileExtension, title } = this.props.data
 
 		return(
+			// <CSSTransition in={true} timeout={2000} classNames="show" appear={true} enter={true} exit={true}>
 			<div className="content" onClick={this.setPreview} style={contentStyle}>
 				<input type="hidden" value={contentId} />
 				<div className="contentThumb" style={contentThumb}>
@@ -87,6 +90,7 @@ class Contents extends React.Component{
 					<a href={`${this.dir}content/${filename}.${fileExtension}`} style={contentCtaA}>Download</a>
 				</div>
 			</div>
+			// </CSSTransition>
 		)
 	}
 }

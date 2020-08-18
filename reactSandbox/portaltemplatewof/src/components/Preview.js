@@ -1,11 +1,18 @@
 import React from 'react';
 import MediaControl from './MediaControl';
 
+import { CSSTransition } from 'react-transition-group';
+
 class Preview extends React.Component{
 	constructor(props){
 		super(props);
 		this.dir = "https://s3-ap-southeast-1.amazonaws.com/qcnt/";
-		this.imgExt = ".png";
+		this.imgExt = ".png"
+		this.audioTag = `${this.dir}content/${this.props.data[0].filename}.${this.props.data[0].fileExtension}`
+		this.state = {
+			timeStamp: "00:00",
+            progressVal: 0
+		}
 	}
 
 	setThumbnail = () => {
@@ -20,8 +27,8 @@ class Preview extends React.Component{
 				return <img src={`${this.dir}content/${filename+this.imgExt}`} style={prevThumbIMGVDO} />
 			case "VIDEOS":
 				return (
-					<video preload="metadata" style={prevThumbIMGVDO}>
-						<source src={`${this.dir}content/${filename}.${fileExtension}#t=21`} type="video/mp4" />
+					<video preload="metadata" style={prevThumbIMGVDO} id="videoFile" onTimeUpdate={this.updateProgress.bind(this, "videoFile")}>
+						<source src={`${this.dir}content/${filename}.${fileExtension}`} type="video/mp4" />
 					</video>
 				)
 			case "Tones":
@@ -29,6 +36,20 @@ class Preview extends React.Component{
 			default:
 				return <img src={`${this.dir}content/${filename+this.imgExt}`} style={prevThumbIMGVDO} />
 		}
+	}
+
+	updateProgress(mediaId){
+		const mediaFile = document.getElementById(mediaId);
+
+		let mins = Math.floor(mediaFile.currentTime / 60);
+		if(mins < 10) mins = "0"+String(mins)
+		let secs = Math.floor(mediaFile.currentTime % 60)
+		if(secs < 10) secs = "0"+String(secs)
+
+		this.setState({
+			progressVal: (mediaFile.currentTime / mediaFile.duration) * 100,
+			timeStamp: `${mins}:${secs}`
+		})
 	}
 
 	render(){
@@ -75,25 +96,27 @@ class Preview extends React.Component{
 		const { catName } = this.props;
 
 		return(
-			<section className="previewWrapper" style={previewWrapper}>
-				<div className="preview">
-					<div className="prevThumb" style={prevThumb}>
-						{this.setThumbnail()}
-						{(catName == "Tones" || catName == "VIDEOS") ? <MediaControl /> : ""}
-					</div>
-					<div className="prevNameCta" style={prevPaddingBottom}>
-						<div className="prevName" style={prevPaddingBottom}>
-							<h3 style={prevNameH3}>{this.props.data[0].title}</h3>
+			<CSSTransition in={true} timeout={800} classNames="show" enter={true} exit={true}>
+				<section className="previewWrapper" style={previewWrapper}>
+					<div className="preview">
+						<div className="prevThumb" style={prevThumb}>
+							{this.setThumbnail()}
+							{(catName == "Tones" || catName == "VIDEOS") ? <MediaControl mediaId={(catName == "VIDEOS") ? "videoFile" : "audioFile"} audioTag={(catName == "Tones") ? this.audioTag : ""} vidProgress={(catName == "VIDEOS") ? this.state.progressVal : ""} vidTimeStamp={(catName == "VIDEOS") ? this.state.timeStamp : ""} updateProgress={this.updateProgress} /> : ""}
 						</div>
-						<div className="prevCta" style={prevCta}>
-							<a href={`${this.dir}content/${this.props.data[0].filename}.${this.props.data[0].fileExtension}`} style={prevCtaA}>Download</a>
+						<div className="prevNameCta" style={prevPaddingBottom}>
+							<div className="prevName" style={prevPaddingBottom}>
+								<h3 style={prevNameH3}>{this.props.data[0].title}</h3>
+							</div>
+							<div className="prevCta" style={prevCta}>
+								<a href={`${this.dir}content/${this.props.data[0].filename}.${this.props.data[0].fileExtension}`} style={prevCtaA}>Download</a>
+							</div>
+						</div>
+						<div className="prevDesc" style={prevPaddingBottom}>
+							<p style={prevDescP}>{this.props.data[0].description}</p>
 						</div>
 					</div>
-					<div className="prevDesc" style={prevPaddingBottom}>
-						<p style={prevDescP}>{this.props.data[0].description}</p>
-					</div>
-				</div>
-			</section>
+				</section>
+			</CSSTransition>
 		)
 	}
 }
