@@ -97,11 +97,17 @@ class Preview extends React.Component{
 
 		return(
 			<CSSTransition in={true} timeout={800} classNames="show" enter={true} exit={true}>
+				
 				<section className="previewWrapper" style={previewWrapper}>
 					<div className="preview">
 						<div className="prevThumb" style={prevThumb}>
 							{this.setThumbnail()}
-							{(catName == "Tones" || catName == "VIDEOS") ? <MediaControl mediaId={(catName == "VIDEOS") ? "videoFile" : "audioFile"} audioTag={(catName == "Tones") ? this.audioTag : ""} vidProgress={(catName == "VIDEOS") ? this.state.progressVal : ""} vidTimeStamp={(catName == "VIDEOS") ? this.state.timeStamp : ""} updateProgress={this.updateProgress} /> : ""}
+							{(catName == "Tones" || catName == "VIDEOS") ? 
+								<MediaControl 
+									mediaId={(catName == "VIDEOS") ? "videoFile" : "audioFile"}
+									audioTag={(catName == "Tones") ? this.audioTag : null} vidProgress={(catName == "VIDEOS") ? this.state.progressVal : null}
+									vidTimeStamp={(catName == "VIDEOS") ? this.state.timeStamp : ""} updateProgress={this.updateProgress}
+								/> : null}
 						</div>
 						<div className="prevNameCta" style={prevPaddingBottom}>
 							<div className="prevName" style={prevPaddingBottom}>
@@ -116,6 +122,7 @@ class Preview extends React.Component{
 						</div>
 					</div>
 				</section>
+
 			</CSSTransition>
 		)
 	}

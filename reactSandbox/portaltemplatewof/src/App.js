@@ -15,9 +15,9 @@ class App extends React.Component{
 	state = {
 		subCategories: [],
 		contents: [],
-		previewContent: "",
-		subCat: "",
-		cat: ""
+		previewContent: null,
+		subCat: null,
+		cat: null
 	}
 
 	componentDidMount(){
