@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import GlobalStyle from './globalStyles';
 
-import { Header } from './components';
+import { Header, List } from './components';
 
 // import styled from 'styled-components';
 
@@ -14,6 +14,7 @@ class App extends Component {
                 <GlobalStyle />
                 <div>
                     <Header />
+                    <List />
                 </div>
             </React.Fragment>
         )

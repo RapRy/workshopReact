@@ -11,6 +11,7 @@ class FilterBox extends Component {
             top:86px;
             left:0%;
             width:100%;
+            padding:0 20px;
         `;
 
         const FilterBoxContainer = styled.div`
@@ -24,16 +25,26 @@ class FilterBox extends Component {
             grid-template-columns:1fr auto;
             grid-gap:20px;
             align-items:center;
+
+            @media all and (max-width:375px){
+                padding:20px 20px 0;
+            }
         `;
 
         const ClearBtn = styled.span`
-            color:hsl(180, 29%, 50%);
+            color:hsl(180, 8%, 52%);
             font-size:1rem;
             font-weight:700;
             cursor:pointer;
+            display:inline-block;
 
             &:hover{
                 text-decoration: underline;
+            }
+
+            @media all and (max-width:375px){
+                font-size:.8rem;
+               margin-bottom:20px;
             }
         `;
 

@@ -13,6 +13,10 @@ const Filter = ({ dummyProp }) => {
         &:last-child{
             margin-right: 0;
         }
+
+        @media all and (max-width:375px){
+            margin-bottom:20px;
+        }
     `;
 
     const FilterName = styled.span`
@@ -23,6 +27,10 @@ const Filter = ({ dummyProp }) => {
         background-color:hsl(180, 52%, 96%);
         display:inline-block;
         color:hsl(180, 29%, 50%);
+
+        @media all and (max-width:375px){
+            font-size:.85rem;
+        }
     `;
 
     const FilterCloseBtn = styled.span`
@@ -39,6 +47,10 @@ const Filter = ({ dummyProp }) => {
 
         > img{
             vertical-align:middle;
+        }
+
+        @media all and (max-width:375px){
+            padding:8px;
         }
     `;
 
