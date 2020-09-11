@@ -4,7 +4,7 @@ import Job from './Job';
 
 import styled from 'styled-components';
 
-const List = () => {
+const List = ({ datas, addFilters }) => {
     const ListWrapper = styled.div`
         position:relative;
         top:80px;
@@ -25,8 +25,9 @@ const List = () => {
     return (
         <ListWrapper>
             <ListContainer>
-                <Job />
-                <Job />
+                {datas.map((data, id) => {
+                    return <Job key={data.id} data={data} addFilters={addFilters} />
+                })}
             </ListContainer>
         </ListWrapper>
     )

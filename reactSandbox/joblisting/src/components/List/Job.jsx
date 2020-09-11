@@ -3,6 +3,10 @@ import React, { Component } from 'react'
 import styled from 'styled-components';
 
 class Job extends Component {
+    filterClick = (e) => {
+        this.props.addFilters(e);
+    }
+
     render() {
 
         const JobContainer = styled.div`
@@ -20,7 +24,7 @@ class Job extends Component {
             // overflow:hidden;
             margin-bottom:40px;
 
-            &:last-child{margin-bottom:0;}
+            // &:last-child{margin-bottom:0;}
 
             &:hover:after{
                 content:"";
@@ -32,6 +36,10 @@ class Job extends Component {
                 display:block;
                 background:hsl(180, 29%, 50%);
                 border-radius:5px 0 0 5px;
+            }
+
+            @media all and (max-width:930px){
+                grid-template-columns: auto 1fr 40%;
             }
 
             @media all and (max-width:375px){
@@ -144,36 +152,48 @@ class Job extends Component {
 
             &:last-child{margin-right:0;}
 
+            @media all and (max-width:930px){
+                margin-bottom:20px;
+            }
+
             @media all and (max-width:375px){
                 margin-bottom:20px;
             }
         `;
 
+        const { company, featured, newTag, position, postedAt, contract, location, role, level, languages, tools, logo } = this.props.data || "";
+        let filterNames = [];
+        (company !== undefined) ? filterNames = [...languages, ...tools, role, level] : filterNames = []
+
+
         return (
-            <JobContainer>
-                <CompanyThumb>
-                    <img src={require('../.././images/photosnap.svg')} alt="company" />
-                </CompanyThumb>
-                <JobDetails>
-                    <UpperDetails>
-                        <CompanyName>Company</CompanyName>
-                        <NewTag>NEW!</NewTag>
-                        <FeaturedTag>FEATURED</FeaturedTag>
-                    </UpperDetails>
-                    <JobTitle>
-                        <H4>Title of the Job</H4>
-                    </JobTitle>
-                    <div className="lowerDetails">
-                        <SpanLowerDetails>1d ago</SpanLowerDetails>
-                        <SpanLowerDetails>Full Time</SpanLowerDetails>
-                        <SpanLowerDetails>USA only</SpanLowerDetails>
+            (company !== undefined) ?
+
+                <JobContainer>
+                    <CompanyThumb>
+                        <img src={require(`../../images/${logo}`)} alt="company" />
+                    </CompanyThumb>
+                    <JobDetails>
+                        <UpperDetails>
+                            <CompanyName>{company}</CompanyName>
+                            {newTag && <NewTag>New</NewTag>}
+                            {featured && <FeaturedTag>FEATURED</FeaturedTag>}
+                        </UpperDetails>
+                        <JobTitle>
+                            <H4>{position}</H4>
+                        </JobTitle>
+                        <div className="lowerDetails">
+                            <SpanLowerDetails>{postedAt}</SpanLowerDetails>
+                            <SpanLowerDetails>{contract}</SpanLowerDetails>
+                            <SpanLowerDetails>{location}</SpanLowerDetails>
+                        </div>
+                    </JobDetails>
+                    <div className="filterTags">
+                        {filterNames.map((filter, id) => filter && <Filter key={id} onClick={this.filterClick}>{filter}</Filter>)}
                     </div>
-                </JobDetails>
-                <div className="filterTags">
-                    <Filter>Frontend</Filter>
-                    <Filter>Another</Filter>
-                </div>
-            </JobContainer>
+                </JobContainer>
+                
+                : ""
         )
     }
 }

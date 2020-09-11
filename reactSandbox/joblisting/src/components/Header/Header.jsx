@@ -6,7 +6,7 @@ import bgHeaderDesktop from '../../images/bg-header-desktop.svg';
 
 import FilterBox from './FilterBox';
 
-const Header = () => {
+const Header = ({ filters, removeFilter, clearFilters, sortJobbings }) => {
 
     const BgContainer = styled.div`
         background-color: hsl(180, 29%, 50%);
@@ -24,7 +24,7 @@ const Header = () => {
         <div className="header">
             <BgContainer>
                 <BgHeader src={bgHeaderDesktop} alt="background" />
-                <FilterBox />
+                {(filters.length > 0) ? <FilterBox filters={filters} removeFilter={removeFilter} sortJobbings={sortJobbings} clearFilters={clearFilters} /> : ""}
             </BgContainer>
         </div>
     )

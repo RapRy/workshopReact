@@ -48,16 +48,16 @@ class FilterBox extends Component {
             }
         `;
 
+        const { filters, removeFilter, clearFilters, sortJobbings } = this.props
+
         return (
             <FilterBoxWrapper>
                 <FilterBoxContainer>
                     <div className="filtersContainer">
-                        <Filter dummyProp="JavaScript" />
-                        <Filter dummyProp="Frontend" />
-                        <Filter dummyProp="CSS" />
+                        {filters.map((filterName, id) => <Filter key={id} filterName={filterName} removeFilter={removeFilter} sortJobbings={sortJobbings} />)}
                     </div>
                     <div className="clearContainer">
-                        <ClearBtn>Clear</ClearBtn>
+                        <ClearBtn onClick={clearFilters}>Clear</ClearBtn>
                     </div>
                 </FilterBoxContainer>
             </FilterBoxWrapper>

@@ -4,7 +4,7 @@ import removeIcon from '../../images/icon-remove.svg';
 
 import styled from 'styled-components';
 
-const Filter = ({ dummyProp }) => {
+const Filter = ({ filterName, removeFilter, sortJobbings }) => {
 
     const Filter = styled.div`
         margin-right:20px;
@@ -54,10 +54,16 @@ const Filter = ({ dummyProp }) => {
         }
     `;
 
+
+    const clickEvent = (e) => {
+        removeFilter(e);
+        sortJobbings();
+    }
+
     return (
         <Filter>
-            <FilterName>{dummyProp}</FilterName>
-            <FilterCloseBtn><img src={removeIcon} alt="Clear" /></FilterCloseBtn>
+            <FilterName>{filterName}</FilterName>
+            <FilterCloseBtn onClick={clickEvent}><img src={removeIcon} alt="remove" /></FilterCloseBtn>
         </Filter>
     )
 }
